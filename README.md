@@ -39,8 +39,8 @@ This app has been **thoroughly tested on 5 real Android devices** to ensure comp
 | Samsung Galaxy F13 | 14 | Developer | ✅ Works perfectly |
 | OnePlus CE 3 5G | 15 | Developer | ✅ Works perfectly |
 | OPPO A59 5G | 15 | Developer | ✅ Works perfectly |
-| Google Pixel 4a | 14 | Friend | ✅ Verified |
-| iQOO Z10x | 14 | Friend | ✅ Verified |
+| Google Pixel 4a | 14 | Tester | ✅ Verified |
+| iQOO Z10x | 14 | Tester | ✅ Verified |
 
 **Supports:** Android 5.0 (API 21) to Android 15 (API 35)
 
