@@ -16,7 +16,7 @@ A modern Android audio enhancement application built with **Kotlin**, **Jetpack 
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/image.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Screenshots
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/picture.png" width="22"/> Screenshots
 
 <div align="center">
 
@@ -30,7 +30,7 @@ A modern Android audio enhancement application built with **Kotlin**, **Jetpack 
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/check-circle.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Tested On Real Devices
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/checkmark.png" width="22"/> Tested On Real Devices
 
 This app has been **thoroughly tested on 5 real Android devices** to ensure compatibility and stability:
 
@@ -46,19 +46,18 @@ This app has been **thoroughly tested on 5 real Android devices** to ensure comp
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/book.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Overview
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/document.png" width="22"/> Overview
 
 Audio Booster is a native Android application focused on delivering a clean, premium experience for controlling media volume and applying hardware-based loudness enhancement.
 
 Instead of modifying audio files, the application works directly with Android's audio framework to provide real-time system-wide loudness enhancement while maintaining smooth performance and modern UI/UX standards.
 
 The application has been developed using modern Android architecture with Kotlin, StateFlow, Jetpack Compose, and lifecycle-aware components.
-
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/spark.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Features
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/light-on.png" width="22"/> Features
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/speaker-high.svg" width="24" height="24" style="margin-right: 6px; vertical-align: middle;"> Audio
+### <img src="https://img.icons8.com/ios-filled/20/ffffff/high-volume.png" width="20"/> Audio
 
 - Real-time Media Volume Control
 - LoudnessEnhancer Integration
@@ -67,7 +66,7 @@ The application has been developed using modern Android architecture with Kotlin
 - Automatic Audio Effect Updates
 - Device-aware Audio Handling
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/device-mobile.svg" width="24" height="24" style="margin-right: 6px; vertical-align: middle;"> Device Support
+### <img src="https://img.icons8.com/ios-filled/20/ffffff/smartphone.png" width="20"/> Device Support
 
 - Phone Speaker
 - Wired Headphones
@@ -75,7 +74,7 @@ The application has been developed using modern Android architecture with Kotlin
 - Bluetooth Speakers
 - USB Audio Devices
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/palette.svg" width="24" height="24" style="margin-right: 6px; vertical-align: middle;"> User Interface
+### <img src="https://img.icons8.com/ios-filled/20/ffffff/color-palette.png" width="20"/> User Interface
 
 - Jetpack Compose UI
 - Material 3 Design
@@ -86,7 +85,7 @@ The application has been developed using modern Android architecture with Kotlin
 - Splash Screen
 - Custom Slider Component
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/lightning.svg" width="24" height="24" style="margin-right: 6px; vertical-align: middle;"> Performance
+### <img src="https://img.icons8.com/ios-filled/20/ffffff/lightning-bolt.png" width="20"/> Performance
 
 - Optimized Compose Recompositions
 - Cached Canvas Drawing
@@ -97,42 +96,42 @@ The application has been developed using modern Android architecture with Kotlin
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/play-circle.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Quick Start
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/circled-play.png" width="22"/> Quick Start
 
 ### How to Use
 
 | Feature | Steps |
 |---------|-------|
-| **Adjust Media Volume** | Use the "Media Volume" slider to control system volume (0-100%) |
-| **Enable Boost** | Drag the "Boost Volume" slider to apply loudness enhancement |
+| **Adjust Media Volume** | Use the **Media Volume** slider to control system volume (0–100%) |
+| **Enable Boost** | Drag the **Boost Volume** slider to apply loudness enhancement |
 | **Ultra Boost Mode** | Enable the switch after setting Boost > 0% for advanced amplification |
-| **Check Device** | View current audio device and boost status in "System Status" |
+| **Check Device** | View current audio device and boost status in **System Status** |
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/warning.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> Important Safety Notes
+### <img src="https://img.icons8.com/ios-filled/20/ffffff/error.png" width="20"/> Important Safety Notes
 
 - High amplification may damage speakers, headphones, or hearing
-- Use moderate boost levels (50-75%) for best results
+- Use moderate boost levels (50–75%) for best results
 - Always monitor audio quality while adjusting
 - Use headphones at lower volumes to protect your hearing
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/blueprint.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Architecture
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/workflow.png" width="22"/> Architecture
 
-```
+```text
                     UI (Jetpack Compose)
-                             │
-                             ▼
+                            │
+                            ▼
                      MainViewModel
-                             │
-              ┌──────────────┴──────────────┐
-              │                             │
-              ▼                             ▼
-     AudioController              LoudnessController
-              │                             │
-              └──────────────┬──────────────┘
-                             ▼
-                    Android Audio Framework
+                            │
+              ┌─────────────┴─────────────┐
+              │                           │
+              ▼                           ▼
+      AudioController          LoudnessController
+              │                           │
+              └─────────────┬─────────────┘
+                            ▼
+                 Android Audio Framework
 ```
 
 ### Architecture Explanation
@@ -149,13 +148,13 @@ The application has been developed using modern Android architecture with Kotlin
 | Decision | Reason |
 |----------|--------|
 | StateFlow for state management | Reactive, lifecycle-aware, integrates seamlessly with Compose |
-| BroadcastReceiver for volume monitoring | Most reliable way to detect system volume changes |
+| BroadcastReceiver for volume monitoring | Reliable way to detect system volume changes |
 | Canvas for custom sliders | Better performance than standard Slider during rapid updates |
 | No external dependencies | Simpler, faster, and easier to maintain |
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/stack.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Tech Stack
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/source-code.png" width="22"/> Tech Stack
 
 | Technology | Version | Usage |
 |------------|---------|-------|
@@ -172,312 +171,321 @@ The application has been developed using modern Android architecture with Kotlin
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/folder.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Project Structure
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/opened-folder.png" width="22"/> Project Structure
 
-```
+```text
 app
 │
 ├── audio
-│   ├── AudioController.kt       # System volume & device monitoring
-│   ├── LoudnessController.kt    # Audio effects management
-│   └── AudioState.kt            # UI state data class
+│   ├── AudioController.kt
+│   ├── LoudnessController.kt
+│   └── AudioState.kt
 │
 ├── ui
 │   ├── screens
-│   │   └── MainScreen.kt        # Main UI composable (~1000 lines)
+│   │   └── MainScreen.kt
 │   │
 │   └── theme
-│       ├── Color.kt             # Material 3 color palette
-│       ├── Theme.kt             # Theme configuration
-│       └── Type.kt              # Typography settings
+│       ├── Color.kt
+│       ├── Theme.kt
+│       └── Type.kt
 │
 ├── viewmodel
-│   └── MainViewModel.kt         # State management & business logic
+│   └── MainViewModel.kt
 │
-└── MainActivity.kt              # Activity entry point
+└── MainActivity.kt
 ```
-
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/download.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Installation
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/download.png" width="22"/> Installation
 
-### Option 1: Download Pre-built APK (Easiest)
+### Option 1: Download Pre-built APK (Recommended)
 
-Download the latest APK from the [Releases](https://github.com/swastik-chavan/audio-booster/releases/tag/v1.0) section.
+Download the latest APK from the **Releases** section.
 
 1. Download `audio-booster-v1.0.apk`
-2. Transfer to your Android device (or direct install from browser)
+2. Transfer it to your Android device
 3. Install the APK
-4. Grant `Modify Audio Settings` permission when prompted
-5. Open the app and start boosting!
+4. Grant **Modify Audio Settings** permission when prompted
+5. Launch Audio Booster and enjoy!
 
 ### Option 2: Build from Source
 
-#### Prerequisites
-- Android Studio (Latest Stable - Hedgehog+)
+#### Requirements
+
+- Android Studio (Latest Stable)
 - Kotlin 2.0
-- JDK 11 or higher
-- Android SDK API Level 35
+- JDK 11+
+- Android SDK API 35
 
 #### Build Steps
 
 ```bash
 # Clone the repository
 git clone https://github.com/swastik-chavan/audio-booster.git
+
 cd audio-booster
 
-# Build APK (release mode)
+# Build Release APK
 ./gradlew assembleRelease
-
-# Or open in Android Studio and use:
-# Build → Generate APK(s) → release
 ```
 
-The APK will be generated at: `app/build/outputs/apk/release/app-release.apk`
+Or open the project in Android Studio and select:
+
+```
+Build → Generate APK(s) → Generate APK
+```
+
+Generated APK:
+
+```
+app/build/outputs/apk/release/app-release.apk
+```
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/lock.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Permissions
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/lock-2.png" width="22"/> Permissions
 
-The application only uses permissions required for audio functionality:
+Only the required permissions are requested.
 
-- **MODIFY_AUDIO_SETTINGS** - Required to control system volume
-- **CHANGE_NOTIFICATION_SETTINGS** - For audio stream management (where applicable on newer Android versions)
+| Permission | Purpose |
+|------------|---------|
+| MODIFY_AUDIO_SETTINGS | Control system audio volume |
+| CHANGE_NOTIFICATION_SETTINGS | Manage audio stream behaviour on supported Android versions |
 
-**No internet permission is required** for the core functionality. This app works completely offline.
+✅ No Internet permission required.
+
+✅ Works completely offline.
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/bolt.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Performance & Optimizations
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/flash-on.png" width="22"/> Performance & Optimizations
 
 ### Performance Metrics
 
-- **App Size:** ~2.5 MB (release APK)
-- **Minimum RAM Required:** 100 MB free
-- **Battery Impact:** Negligible (no background services)
-- **Memory Footprint:** ~30-50 MB when running
-- **Startup Time:** <1 second
+- APK Size: **~2.5 MB**
+- Minimum RAM: **100 MB**
+- Startup Time: **< 1 second**
+- Runtime Memory: **30–50 MB**
+- Background Services: **None**
+- Battery Usage: **Minimal**
 
-### Optimizations Implemented
+### Optimizations
 
-| Optimization | Impact | Benefit |
-|---|---|---|
-| Cached Canvas drawing | Prevents redraw on every frame | Smooth 60 FPS performance |
-| Throttled slider updates (25ms) | Reduces rapid state updates | Lower CPU usage |
-| StateFlow with WhileSubscribed | Memory-efficient flow sharing | Prevents memory leaks |
-| Lazy device monitor initialization | Only loads when needed | Faster startup |
-| Stable lambda references | Prevents unnecessary recompositions | Better Compose efficiency |
-
----
-
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/warning-circle.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Known Limitations & Safety Notes
-
-| Limitation | Details | Workaround |
-|---|---|---|
-| **High boost distortion** | Very high amplification (90-100%) may cause audio distortion | Use moderate levels (50-75% for best quality) |
-| **Device compatibility** | May fail or provide low audio quality on some budget devices | Test with lower boost levels first |
-| **Rooted devices** | Audio effects may not work on rooted Android installations | Use on non-rooted devices only |
-| **Stereo sound issue** | Some devices may have stereo sound processing issues | Report specific device on GitHub Issues |
-| **System muting** | Doesn't work when device is in silent/do-not-disturb mode | Disable silent mode to use boost |
-| **Requires permission grant** | `MODIFY_AUDIO_SETTINGS` is mandatory | Grant permission at first launch |
+| Optimization | Benefit |
+|-------------|---------|
+| Cached Canvas Drawing | Smooth rendering |
+| Slider Update Throttling | Lower CPU usage |
+| StateFlow (WhileSubscribed) | Better memory efficiency |
+| Lazy Initialization | Faster startup |
+| Stable Lambda References | Reduced Compose recomposition |
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/bug.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Troubleshooting
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/error.png" width="22"/> Known Limitations & Safety Notes
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/question.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> Boost not working?
-
-**Possible Causes:**
-
-1. **Device doesn't support LoudnessEnhancer API**
-   - Check Android version (requires API 18+, works best on API 21+)
-   - Some budget devices may not include LoudnessEnhancer
-   - **Solution:** App displays "Unsupported" message if not available
-
-2. **Permission not granted**
-   - **Solution:** Go to `Settings → Apps → Audio Booster → Permissions → Enable "Modify Audio Settings"`
-
-3. **Audio effect not applied to current app**
-   - LoudnessEnhancer only affects the media stream (music, videos, games)
-   - Does NOT affect calls or system notification sounds
-   - **Solution:** Make sure media/music app is actively playing
-
-4. **Silent/Do Not Disturb mode enabled**
-   - **Solution:** Disable silent mode first, then use boost
-
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/question.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> App crashes on startup?
-
-**Solutions:**
-
-1. Check Android version (requires Android 5.0+, API 21+)
-2. Uninstall and reinstall the app completely
-3. Clear app cache: `Settings → Apps → Audio Booster → Storage → Clear Cache`
-4. Restart your device
-5. Report issue on GitHub with device model and Android version
-
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/question.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> High battery drain?
-
-**Solution:**
-- Audio Booster uses minimal resources (no background services or wake locks)
-- Battery drain is from amplified audio playback itself, not the app
-- Using lower boost levels reduces overall power consumption
-- Check if another app is consuming battery
-
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/question.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> Audio quality sounds bad or distorted?
-
-**Solutions:**
-
-1. **Lower the boost level** - Start at 30-50% and increase gradually
-2. **Check speaker/headphone condition** - Damaged speakers produce distortion
-3. **Use medium volume** - Better results at 50-80% system volume + moderate boost
-4. **Try different audio apps** - Some apps have better audio quality than others
-
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/question.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> Not working on my device?
-
-Before reporting:
-1. Note your device model and Android version
-2. Try with a different music app (Spotify, YouTube Music, etc.)
-3. Test with lower boost levels first
-4. Clear app cache and reinstall
-
-**Still having issues?** [Report a bug](https://github.com/swastik-chavan/audio-booster/issues/new) with full details.
+| Limitation | Details | Recommendation |
+|------------|---------|----------------|
+| High Boost | Very high boost may introduce distortion | Keep boost between 50–75% |
+| Device Compatibility | Some low-end devices provide limited enhancement | Test lower boost first |
+| Rooted Devices | Audio effects may not behave correctly | Recommended on stock Android |
+| Silent Mode | Doesn't affect muted devices | Disable Silent/DND mode |
+| Permission Required | MODIFY_AUDIO_SETTINGS is mandatory | Grant permission during first launch |
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/target.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Roadmap
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/bug.png" width="22"/> Troubleshooting
 
-### Planned Features & Improvements
+### Boost Not Working?
 
-We have **many features planned** to make Audio Booster even better:
+Possible reasons:
 
-#### Planned Enhancements (No specific timeline)
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/wrench.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Fix and improve stability on edge devices
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/paint-brush.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Material You Dynamic Colors support
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/wave-sine.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Dynamic 7-band Equalizer
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/lightning.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Quick Settings Tile for fast access
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/game-controller.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Per-app audio profiles (auto-boost for games)
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/headphones.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Audio preset profiles (Gaming, Music, Movies, Calls)
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/chart-bar.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Usage analytics (privacy-first, optional)
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/vibrate.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Haptic feedback on interactions
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/app-window.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Widget Support
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/swatches.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Theme customization options
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/globe.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Multi-language support
+- LoudnessEnhancer API isn't supported.
+- Permission not granted.
+- No media is currently playing.
+- Device is in Silent or Do Not Disturb mode.
 
-**Note:** Roadmap is subject to change based on community feedback and testing results.
+### App Crashes?
+
+Try:
+
+1. Restart your device.
+2. Reinstall the app.
+3. Clear App Cache.
+4. Verify Android version (API 21+).
+
+### Distorted Audio?
+
+- Lower Boost level.
+- Use better headphones/speakers.
+- Keep system volume between **50–80%**.
+
+### Battery Drain?
+
+Audio Booster itself doesn't keep background services running.
+
+Battery usage mainly comes from audio playback.
+
+### Still Having Problems?
+
+Please open a GitHub Issue including:
+
+- Device model
+- Android version
+- Steps to reproduce
+- Screenshots (if possible)
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/handshake.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Contributing
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/road.png" width="22"/> Roadmap
 
-Contributions are welcome! Whether you want to report bugs, suggest features, or submit code, here's how:
+### Planned Features
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/bug.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> Report a Bug
+The following features are planned for future releases:
 
-1. Check if the issue already exists: [Issues](https://github.com/swastik-chavan/audio-booster/issues)
-2. If not, [create a new issue](https://github.com/swastik-chavan/audio-booster/issues/new) with:
-   - Your device model and Android version
-   - Steps to reproduce the issue
-   - Expected vs actual behavior
-   - Screenshots (if applicable)
+- 🎨 Material You Dynamic Colors
+- 🎚️ 7-Band Equalizer
+- ⚡ Quick Settings Tile
+- 🎮 Per-app Audio Profiles
+- 🎧 Audio Presets (Music, Gaming, Movies)
+- 📊 Privacy-first Usage Analytics
+- 📳 Haptic Feedback
+- 🪟 Home Screen Widgets
+- 🌈 Theme Customization
+- 🌍 Multi-language Support
+- 🔧 Stability Improvements
 
-#### Example Bug Report:
+> **Note:** Features may change based on community feedback and future Android API updates.
 
-```
-Device: Samsung Galaxy F13, Android 14
-Issue: Slider lags when dragging
+---
 
-Steps to reproduce:
-1. Open app
-2. Drag boost slider quickly
-3. Notice delay in UI update
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/handshake.png" width="22"/> Contributing
 
-Expected: Smooth slider movement
-Actual: 1-2 second lag
+Contributions are always welcome!
+
+### 🐞 Reporting Bugs
+
+Before opening a new issue:
+
+- Search existing issues first.
+- Include your device model.
+- Include Android version.
+- Explain how to reproduce the bug.
+- Attach screenshots if possible.
+
+### 💡 Feature Requests
+
+Want a new feature?
+
+Open a Feature Request and explain:
+
+- What you'd like
+- Why it would be useful
+- Possible implementation ideas
+
+### 💻 Code Contributions
+
+1. Fork the repository.
+2. Create a new branch.
+
+```bash
+git checkout -b feature/my-feature
 ```
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/lightbulb.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> Suggest a Feature
+3. Commit your changes.
 
-1. [Open an issue](https://github.com/swastik-chavan/audio-booster/issues/new)
-2. Label it as `feature-request`
-3. Describe the feature and why it would help
+```bash
+git commit -m "feat: add new feature"
+```
 
-### <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/hammer.svg" width="20" height="20" style="margin-right: 6px; vertical-align: middle;"> Submit Code Changes
+4. Push your branch.
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Make your changes
-4. Test on at least 2 different devices
-5. Commit with clear messages: `git commit -m "feat: add haptic feedback to sliders"`
-6. Push to your fork: `git push origin feature/my-feature`
-7. Open a Pull Request with a clear description of your changes
+```bash
+git push origin feature/my-feature
+```
 
-#### Code Style Guidelines
+5. Open a Pull Request.
 
-- Follow [Google's Kotlin Style Guide](https://developer.android.com/kotlin/style-guide)
-- Use meaningful variable names (not `t`, `x`, `temp`)
-- Add comments for complex logic
-- Format code: `./gradlew ktlintFormat`
-- Write unit tests for new features
+### Coding Guidelines
+
+- Follow Google's Kotlin Style Guide.
+- Write meaningful commit messages.
+- Test before opening a PR.
+- Keep code clean and documented.
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/wheelchair.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Accessibility
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/accessibility.png" width="22"/> Accessibility
 
-- Large touch targets (56dp+ per Material guidelines)
-- Material 3 typography for readability
-- High color contrast (neon on dark background)
-- Device status descriptions
-- Scrollable dialogs for smaller screens
-- Adaptive layouts for different screen sizes
-- Content descriptions for UI elements
+Audio Booster follows Material Design accessibility guidelines.
 
----
+Features include:
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/scroll.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
-
-### Open Source Libraries & Credits
-
-- [Jetpack Compose](https://developer.android.com/jetpack/compose) - UI Toolkit by Google
-- [Material Design 3](https://m3.material.io/) - Design system by Google
-- [Android Jetpack](https://developer.android.com/jetpack) - Android development libraries by Google
-- [Kotlin](https://kotlinlang.org/) - Programming language by JetBrains
+- Large touch targets
+- High contrast UI
+- Readable typography
+- Adaptive layouts
+- Content descriptions
+- Responsive dialogs
+- Better usability on small screens
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/user-circle.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Author
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/document.png" width="22"/> License
 
-**Developed by:** Swastik Chavan
+This project is licensed under the **MIT License**.
 
-- **GitHub:** [@swastik-chavan](https://github.com/swastik-chavan)
-- **Portfolio:** [View all projects](https://github.com/swastik-chavan?tab=repositories)
+See the **LICENSE** file for more details.
 
-### Special Thanks
+### Credits
 
-Thanks to friends and beta testers who tested the app on their devices and provided valuable feedback!
+Built using:
+
+- Jetpack Compose
+- Android Jetpack
+- Kotlin
+- Material Design 3
 
 ---
 
-## <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/chat-circle.svg" width="28" height="28" style="margin-right: 8px; vertical-align: middle;"> Getting Help
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" width="22"/> Author
 
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/book-open.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> **Documentation:** Check this README first
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/warning-circle.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> **Report Bugs:** [Open an issue](https://github.com/swastik-chavan/audio-booster/issues/new)
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/chat-dots.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> **Ask Questions:** [GitHub Discussions](https://github.com/swastik-chavan/audio-booster/discussions)
-- <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/link.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> **GitHub:** [Project Repository](https://github.com/swastik-chavan/audio-booster)
+**Swastik Chavan**
+
+GitHub:
+https://github.com/swastik-chavan
+
+Explore more projects:
+https://github.com/swastik-chavan?tab=repositories
+
+### ❤️ Special Thanks
+
+Special thanks to everyone who tested the application and shared valuable feedback.
+
+---
+
+## <img src="https://img.icons8.com/ios-filled/24/ffffff/help.png" width="22"/> Getting Help
+
+If you need assistance:
+
+- 📖 Read this README.
+- 🐞 Open a GitHub Issue.
+- 💬 Use GitHub Discussions.
+- ⭐ Star the repository if you found it useful.
 
 ---
 
 <div align="center">
 
-Built with Kotlin • Jetpack Compose • Material 3
+### Built with ❤️ using Kotlin • Jetpack Compose • Material 3
+
+<br>
+
+**Made with ❤️ by Swastik**
+
+If you found this project helpful,
+
+## ⭐ Star this Repository ⭐
 
 </div>
 
-<div align="center">
-
-Made with <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/heart.svg" width="18" height="18" style="margin: 0 4px; vertical-align: middle;"> by **Swastik**
-
-**[<img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/Light/star.svg" width="18" height="18" style="margin-right: 4px; vertical-align: middle;"> Star us on GitHub](https://github.com/swastik-chavan/audio-booster)** if you find this useful!
-
-</div>
