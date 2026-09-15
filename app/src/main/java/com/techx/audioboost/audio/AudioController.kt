@@ -1,5 +1,6 @@
 package com.techx.audioboost.audio
 
+import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -126,7 +127,10 @@ class Api21DeviceMonitor(
     }
 }
 
-class AudioController(private val context: Context) {
+class AudioController(
+    private val context: Context,
+    private val onDeviceTransition: ((Pair<String, DeviceType>) -> Unit)? = null
+) {
 
     private var audioManager: AudioManager? = null
     private var maxVolume = 15
@@ -139,18 +143,26 @@ class AudioController(private val context: Context) {
 
     private var deviceMonitor: AudioDeviceMonitor? = null
 
-    private val volumeReceiver = object : BroadcastReceiver() {
+    private val audioRoutingReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == "android.media.VOLUME_CHANGED_ACTION") {
-                try {
-                    val streamType = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1)
-                    if (streamType == AudioManager.STREAM_MUSIC) {
-                        _volumeFlow.value = getMediaVolumePercent()
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                            updateDeviceState()
+            when (intent.action) {
+                "android.media.VOLUME_CHANGED_ACTION" -> {
+                    try {
+                        val streamType = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1)
+                        if (streamType == AudioManager.STREAM_MUSIC) {
+                            _volumeFlow.value = getMediaVolumePercent()
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                                updateDeviceState()
+                            }
                         }
+                    } catch (t: Throwable) {
                     }
-                } catch (t: Throwable) {
+                }
+                AudioManager.ACTION_AUDIO_BECOMING_NOISY,
+                Intent.ACTION_HEADSET_PLUG,
+                BluetoothDevice.ACTION_ACL_DISCONNECTED,
+                BluetoothDevice.ACTION_ACL_CONNECTED -> {
+                    updateDeviceState()
                 }
             }
         }
@@ -176,11 +188,18 @@ class AudioController(private val context: Context) {
                 deviceMonitor?.start()
             }
 
-            val filter = IntentFilter("android.media.VOLUME_CHANGED_ACTION")
+            val filter = IntentFilter().apply {
+                addAction("android.media.VOLUME_CHANGED_ACTION")
+                addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
+                addAction(Intent.ACTION_HEADSET_PLUG)
+                addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
+                addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
+            }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                context.registerReceiver(volumeReceiver, filter, Context.RECEIVER_EXPORTED)
+                context.registerReceiver(audioRoutingReceiver, filter, Context.RECEIVER_EXPORTED)
             } else {
-                context.registerReceiver(volumeReceiver, filter)
+                context.registerReceiver(audioRoutingReceiver, filter)
             }
 
             _volumeFlow.value = getMediaVolumePercent()
@@ -193,7 +212,11 @@ class AudioController(private val context: Context) {
     private fun updateDeviceState() {
         try {
             val device = deviceMonitor?.getCurrentDevice() ?: Pair("Phone Speaker", DeviceType.SPEAKER)
+            val previous = _deviceFlow.value
             _deviceFlow.value = device
+            if (previous != device) {
+                onDeviceTransition?.invoke(device)
+            }
         } catch (t: Throwable) {
         }
     }
@@ -224,7 +247,7 @@ class AudioController(private val context: Context) {
 
     fun release() {
         try {
-            context.unregisterReceiver(volumeReceiver)
+            context.unregisterReceiver(audioRoutingReceiver)
         } catch (t: Throwable) {
         }
         try {

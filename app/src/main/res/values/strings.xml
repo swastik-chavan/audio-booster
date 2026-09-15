@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Audio Booster</string>
+    <string name="tile_name">Audio Boost</string>
+    <string name="widget_2x1_name">Audio Booster Compact</string>
+    <string name="widget_2x2_name">Audio Booster Pro</string>
+    <string name="notification_channel_name">Audio Booster Status</string>
+    <string name="notification_channel_desc">Shows active audio boost level and quick controls</string>
 </resources>

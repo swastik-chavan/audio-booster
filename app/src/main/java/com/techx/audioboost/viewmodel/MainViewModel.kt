@@ -3,118 +3,214 @@ package com.techx.audioboost.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.techx.audioboost.audio.AudioController
+import com.techx.audioboost.audio.AudioProcessingManager
 import com.techx.audioboost.audio.AudioState
-import com.techx.audioboost.audio.LoudnessController
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.techx.audioboost.model.AppProfile
+import com.techx.audioboost.model.AudioPreset
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val audioController = AudioController(application)
-    private val loudnessController = LoudnessController(application)
+    val manager = AudioProcessingManager.getInstance(application)
+    val settingsRepository = manager.settingsRepository
+    val audioEngine = manager.audioEngine
+    val safetyLimiter = manager.safetyLimiter
+    val hapticManager = manager.hapticManager
+    val appProfileManager = manager.appProfileManager
 
-    private val _boostPercent = MutableStateFlow(0)
-    private val _isUltraModeEnabled = MutableStateFlow(false)
-    private val _ultraBoostPercent = MutableStateFlow(0)
-
-    var hasShownUltraWarning = false
+    var hasShownUltraWarning: Boolean
+        get() = manager.hasShownUltraWarning
+        set(value) {
+            manager.hasShownUltraWarning = value
+        }
 
     val uiState: StateFlow<AudioState> = combine(
-        audioController.volumeFlow,
-        audioController.deviceFlow,
-        _boostPercent,
-        _isUltraModeEnabled,
-        _ultraBoostPercent
-    ) { volume, device, boost, ultraEnabled, ultraPercent ->
-        val normalGain = calculateNormalGain(boost)
-        val ultraGain = if (ultraEnabled) calculateUltraGain(ultraPercent) else 0
-        val combinedGain = (normalGain + ultraGain).coerceAtMost(5000)
+        manager.audioController.volumeFlow,
+        manager.audioController.deviceFlow,
+        manager.effectsState
+    ) { volume, device, fx ->
+        val normalGain = manager.calculateNormalGain(fx.boostPercent)
+        val ultraGain = if (fx.isUltra) manager.calculateUltraGain(fx.ultraPercent) else 0
+
+        val limiterResult = safetyLimiter.computeSafeGain(
+            requestedNormalGainmB = normalGain,
+            requestedUltraGainmB = ultraGain,
+            eqBandLevels = fx.eqBands,
+            isEqEnabled = fx.isEqEnabled,
+            bassBoostStrength = fx.bassStrength,
+            isBassBoostEnabled = fx.isBassEnabled,
+            deviceType = device.second,
+            isLimiterEnabled = fx.isLimiterEnabled,
+            isSafetyLimitEnabled = fx.isSafetyLimitEnabled
+        )
+
+        val activePreset = fx.allPresets.firstOrNull { it.id == fx.activePresetId }
+            ?: AudioPreset.FLAT
 
         AudioState(
             currentDeviceName = device.first,
             currentDeviceType = device.second,
             systemVolumePercent = volume,
-            boostPercent = boost,
-            isBoostSupported = loudnessController.isSupported,
-            loudnessGainmB = combinedGain,
-            isUltraModeEnabled = ultraEnabled,
-            ultraBoostPercent = ultraPercent,
-            isUltraModeLocked = boost == 0
+            boostPercent = fx.boostPercent,
+            isBoostSupported = audioEngine.isLoudnessSupported,
+            loudnessGainmB = limiterResult.effectiveGainmB,
+            isUltraModeEnabled = fx.isUltra,
+            ultraBoostPercent = fx.ultraPercent,
+            isUltraModeLocked = fx.boostPercent == 0,
+
+            isEqualizerSupported = audioEngine.isEqualizerSupported,
+            isEqEnabled = fx.isEqEnabled,
+            eqBands = audioEngine.equalizerBands,
+            eqBandLevels = fx.eqBands,
+            eqMinLevelmB = audioEngine.eqMinLevelmB,
+            eqMaxLevelmB = audioEngine.eqMaxLevelmB,
+
+            isBassBoostSupported = audioEngine.isBassBoostSupported,
+            isBassBoostEnabled = fx.isBassEnabled,
+            bassBoostStrength = fx.bassStrength,
+
+            isVirtualizerSupported = audioEngine.isVirtualizerSupported,
+            isVirtualizerEnabled = fx.isVirtEnabled,
+            virtualizerStrength = fx.virtStrength,
+
+            isLimiterEnabled = fx.isLimiterEnabled,
+            isSafetyLimitActive = fx.isSafetyLimitEnabled,
+            limiterReductionmB = limiterResult.limiterReductionmB,
+            safeLimitCeilingmB = limiterResult.safeCeilingmB,
+
+            activePresetId = activePreset.id,
+            activePresetName = activePreset.name,
+            presetsList = fx.allPresets,
+
+            activeSessionsCount = audioEngine.getActiveSessionsCount(),
+            isMediaPlaying = manager.autoOffManager.isMediaPlaying.value,
+            isTransitioning = false
         )
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = AudioState(
-            currentDeviceName = audioController.getCurrentDevice().first,
-            currentDeviceType = audioController.getCurrentDevice().second,
-            systemVolumePercent = audioController.getMediaVolumePercent(),
-            boostPercent = 0,
-            isBoostSupported = loudnessController.isSupported,
-            loudnessGainmB = 0,
-            isUltraModeEnabled = false,
-            ultraBoostPercent = 0,
-            isUltraModeLocked = true
+            currentDeviceName = manager.audioController.getCurrentDevice().first,
+            currentDeviceType = manager.audioController.getCurrentDevice().second,
+            systemVolumePercent = manager.audioController.getMediaVolumePercent(),
+            boostPercent = manager.effectsState.value.boostPercent,
+            isBoostSupported = audioEngine.isLoudnessSupported,
+            eqBands = audioEngine.equalizerBands
         )
     )
 
-    fun calculateNormalGain(percent: Int): Int {
-        return (percent.coerceIn(0, 100) * 2000) / 100
-    }
-
-    fun calculateUltraGain(percent: Int): Int {
-        val x = percent.coerceIn(0, 100) / 100.0
-        val factor = x * x * x
-        val maxUltraGainmB = 3000
-        return (factor * maxUltraGainmB).toInt()
-    }
-
-    private fun updateFinalGain() {
-        val normalGain = calculateNormalGain(_boostPercent.value)
-        val ultraGain = if (_isUltraModeEnabled.value) calculateUltraGain(_ultraBoostPercent.value) else 0
-        val totalGain = (normalGain + ultraGain).coerceAtMost(5000)
-        loudnessController.setTargetGain(totalGain)
-    }
-
     fun updateSystemVolume(percent: Int) {
-        audioController.setMediaVolumePercent(percent)
+        manager.audioController.setMediaVolumePercent(percent)
     }
 
     fun updateBoostPercent(percent: Int) {
-        if (!loudnessController.isSupported) return
-        _boostPercent.value = percent
-        if (percent == 0) {
-            _isUltraModeEnabled.value = false
-        }
-        updateFinalGain()
+        manager.setBoostPercent(percent)
     }
 
     fun toggleUltraMode(enabled: Boolean) {
-        if (!loudnessController.isSupported) return
-        if (_boostPercent.value == 0 && enabled) return
-        _isUltraModeEnabled.value = enabled
-        updateFinalGain()
+        manager.toggleUltraMode(enabled)
     }
 
     fun updateUltraBoostPercent(percent: Int) {
-        if (!loudnessController.isSupported) return
-        _ultraBoostPercent.value = percent
-        updateFinalGain()
+        manager.setUltraBoostPercent(percent)
     }
 
-    fun onActivityDestroyed(isChangingConfigurations: Boolean) {
-        if (!isChangingConfigurations) {
-            loudnessController.release()
-            audioController.release()
+    fun updateEqualizerBand(bandIndex: Int, levelmB: Int) {
+        manager.setEqualizerBand(bandIndex, levelmB)
+    }
+
+    fun toggleEqualizer(enabled: Boolean) {
+        manager.toggleEqualizer(enabled)
+    }
+
+    fun resetEqualizerToFlat() {
+        manager.resetEqualizerToFlat()
+    }
+
+    fun updateBassBoost(enabled: Boolean, strength: Int) {
+        manager.setBassBoost(enabled, strength)
+    }
+
+    fun updateVirtualizer(enabled: Boolean, strength: Int) {
+        manager.setVirtualizer(enabled, strength)
+    }
+
+    fun toggleLimiter(enabled: Boolean) {
+        manager.toggleLimiter(enabled)
+    }
+
+    fun toggleSafetyLimit(enabled: Boolean) {
+        manager.toggleSafetyLimit(enabled)
+    }
+
+    fun applyPreset(preset: AudioPreset) {
+        manager.applyPreset(preset)
+    }
+
+    fun saveCustomPreset(name: String) {
+        manager.saveCustomPreset(name)
+    }
+
+    fun deleteCustomPreset(presetId: String) {
+        manager.deleteCustomPreset(presetId)
+    }
+
+    fun setAppTheme(theme: String) {
+        viewModelScope.launch {
+            settingsRepository.setAppTheme(theme)
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        audioController.release()
-        loudnessController.release()
+    fun setHapticsEnabled(enabled: Boolean) {
+        manager.hapticManager.isEnabled = enabled
+        viewModelScope.launch {
+            settingsRepository.setHapticsEnabled(enabled)
+        }
+    }
+
+    fun setAutoOffMinutes(minutes: Int) {
+        manager.autoOffManager.setAutoOffMinutes(minutes)
+        viewModelScope.launch {
+            settingsRepository.setAutoOffMinutes(minutes)
+        }
+    }
+
+    fun setNotificationEnabled(enabled: Boolean) {
+        manager.setNotificationEnabled(enabled)
+        viewModelScope.launch {
+            settingsRepository.setNotificationEnabled(enabled)
+        }
+    }
+
+    fun setAppProfilesEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.setAppProfilesEnabled(enabled)
+        }
+    }
+
+    fun saveAppProfile(profile: AppProfile, currentProfiles: List<AppProfile>) {
+        viewModelScope.launch {
+            settingsRepository.saveAppProfile(profile, currentProfiles)
+        }
+    }
+
+    fun deleteAppProfile(packageName: String, currentProfiles: List<AppProfile>) {
+        viewModelScope.launch {
+            settingsRepository.deleteAppProfile(packageName, currentProfiles)
+        }
+    }
+
+    fun resetAllSettings() {
+        manager.resetAllSettings()
+    }
+
+    fun onActivityDestroyed(isChangingConfigurations: Boolean) {
+        if (!isChangingConfigurations && manager.effectsState.value.boostPercent == 0) {
+            manager.release()
+        }
     }
 }
